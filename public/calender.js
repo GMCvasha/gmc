@@ -9,6 +9,12 @@ const addEventButton = document.getElementById('add-event');
 let events = [];
 let currentDate = new Date();
 
+async function fetchEvents() {
+  const response = await fetch('http://localhost:5000/api/events');
+  events = await response.json();
+  renderCalendar();
+}
+
 function renderCalendar() {
   calendarDays.innerHTML = '';
   const month = currentDate.getMonth();
@@ -43,11 +49,20 @@ function createCalendarDay(day) {
   return dayElement;
 }
 
-function addEvent() {
+async function addEvent() {
   const date = eventDateInput.value;
   const title = eventTitleInput.value;
   if (date && title) {
-    events.push({ date, title });
+    const response = await fetch('http://localhost:5000/api/events', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ date, title })
+    });
+
+    const newEvent = await response.json();
+    events.push(newEvent);
     renderCalendar();
     eventDateInput.value = '';
     eventTitleInput.value = '';
@@ -66,4 +81,4 @@ nextMonthButton.addEventListener('click', () => {
 
 addEventButton.addEventListener('click', addEvent);
 
-renderCalendar();
+fetchEvents();
