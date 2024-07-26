@@ -10,7 +10,7 @@ let events = [];
 let currentDate = new Date();
 
 async function fetchEvents() {
-  const response = await fetch('http://localhost:5000/api/events');
+  const response = await fetch('https://gmc.onrender.com/api/events');
   events = await response.json();
   renderCalendar();
 }
