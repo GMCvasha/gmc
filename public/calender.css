@@ -1,64 +1,81 @@
-  #calendar {
-    border: 1px solid #ccc;
-    padding: 10px;
-    width: 300px;
-  }
-  
-  #calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  #days-of-week {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-  
-  #days-of-week div, #calendar-days div {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  #calendar-days {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 10px;
-  }
-  
-  #calendar-days div {
-    border: 1px solid #ccc;
-    cursor: pointer;
-    position: relative;
-  }
-  
-  #calendar-days div.event::after {
-    content: '';
-    width: 5px;
-    height: 5px;
-    background-color: red;
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    border-radius: 50%;
-  }
-  
-  #event-form {
-    border: 1px solid #ccc;
-    padding: 10px;
-    width: 300px;
-  }
-  
-  #event-form form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  #event-form label, #event-form input, #event-form button {
-    margin-top: 10px;
-  }
-  
+.calsec {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-direction: column;
+}
+
+
+.calendar {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#days-of-week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 5px 0;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+#calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+}
+
+#calendar-days div {
+  min-height: 50px; /* Date size remains the same */
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.event {
+  background-color: #e6f7ff;
+  border: 1px solid #91d5ff;
+}
+
+.event::after {
+  content: attr(data-title); /* Use data attribute to show the event title */
+  display: none;
+  position: absolute;
+  top: -20px;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+.event:hover::after {
+  display: block;
+}
+
+#event-form {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.calendar-container button{
+  background-color: rgb(196, 227, 254);
+}

@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const http = require('http');
 const socketIo = require('socket.io');
 require('dotenv').config();
+const prayerRequestRoutes = require('./routes/prayerRequestRoutes');
 
 const app = express();
 const server = http.createServer(app);
@@ -25,6 +26,7 @@ app.use(express.json());
 // Routes
 const eventsRouter = require('./routes/events');
 app.use('/api/events', eventsRouter);
+app.use('/prayer-requests', prayerRequestRoutes);
 
 io.on('connection', (socket) => {
   console.log('New client connected');

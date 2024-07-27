@@ -1,0 +1,320 @@
+
+@media only screen and (min-width: 768px) {
+    .phone{
+        display: none;
+    }
+    .adcontainer {
+        display: flex;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /*videotop*/
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Overlay to make text readable */
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            
+        }
+        .video-overlay h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        
+        .video-overlay p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+    /*videotop*/
+    /*DIVE*/
+
+        .divee {
+            margin-top: 20px;
+        }
+
+        .service, .about, .for-you, .social-media {
+            margin-bottom: 20px;
+        }
+
+        .service h2, .about h2, .for-you h2, .social-media h2 {
+            font-size: 18px;
+            color: #bbdefb; /* Light blue for section titles */
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ffffff; /* White border for section titles */
+            padding-bottom: 5px;
+        }
+
+        .service ul, .about ul, .for-you ul, .social-media ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .service li, .about li, .for-you li, .social-media li {
+            margin: 10px 0;
+            color: #ffffff; /* White text for list items */
+        }
+
+        .service li a, .about li a, .for-you li a, .social-media li a {
+            text-decoration: none;
+            color: #ffffff; /* White text for links */
+            transition: color 0.3s;
+        }
+
+        .service li a:hover, .about li a:hover, .for-you li a:hover, .social-media li a:hover {
+            color: #bbdefb; /* Light blue for hover effect on links */
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons li {
+            margin: 0;
+        }
+
+        .social-icons img {
+            width: 24px; /* Size of the social media icons */
+            height: 24px;
+        }
+    /*DIVE*/
+
+    #calendar-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    #calendar {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+      }
+    .motivation {
+        background: #fff;
+        margin: 20px 0;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .phone {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        background-color: #19385a;
+        
+    }
+    .phone .logo {
+        width: 40px;
+        transition: 1s;
+    }
+    .phone .logo:hover {
+        transform: scale(2);
+        transition: 1s;
+    }
+    #menu_b {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+    }
+    #menu {
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #005f9a;
+        color: #fff;
+        padding: 10px;
+        flex-direction: column;
+        position: absolute;
+        opacity: 80%;
+        margin-top: 20px;
+        top: 0;
+        right: 2px;
+        width: 50vw;
+        z-index: 1;
+    }
+    .navigations {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .navigations a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        margin: 10px 0;
+    }
+    #menu_bx {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        align-self: flex-end;
+        margin: 20px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        
+    }
+    .allcontainer {
+        display: flex;
+        flex-direction: column;
+    }
+    .sidebar {
+        display: none;
+    }
+    .adcontainer {
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /*videotop*/
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Overlay to make text readable */
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .video-overlay h2 {
+            font-size: 30px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        
+        .video-overlay p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+    /*videotop*/
+    /*DIVE*/
+
+        .divee {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .divee > div {
+            flex: 1;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #ffffff;
+        }
+
+        .divee h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        .divee ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .divee ul li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .divee ul li a {
+            text-decoration: none;
+            color: #007bff;
+            transition: color 0.3s ease;
+        }
+
+        .divee ul li a:hover {
+            color: #0056b3;
+        }
+
+        .social-icons {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .social-icons li {
+            margin-right: 10px;
+        }
+
+        .social-icons li:last-child {
+            margin-right: 0;
+        }
+
+        .social-icons img {
+            width: 30px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons img:hover {
+            transform: scale(1.1);
+        }
+
+    /*DIVE*/
+
+#calendar-container {
+    display: flex;
+    align-items: center;
+  }
+
+
+#calendar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .motivation {
+    background: #fff;
+    margin: 20px 0;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+}
+

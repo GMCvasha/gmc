@@ -3,26 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../Gimages/icon.ico" type="image/x-icon">
-    <title>Global Methodist Church - Naivasha</title>
+    <link rel="icon" href="../Gimages/Nicon.ico" type="image/x-icon">
+    <title>Berean Global Methodist Church - Naivasha</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="ministries.css">
+    <link rel='stylesheet' href="phone.css">
 
 </head>
 <body>
+    <span class="phone">
+        <img class="logo" src="../Gimages/newlogo.png">
+        <button id="menu_b" onclick="menu()">&#x2630;</button>
+        <div id="menu">
+            <nav class="navigations">
+                <button id="menu_bx" onclick="menu()">x</button>
+                <a href="index.html">Home</a>
+                <a href="ministries.html">Ministries</a>
+                <a href="media.html">Social media</a>
+                <a href="about.html">About us</a>
+                <a href="contact.html">Contact us</a>
+            </nav>
+        </div>
+    </span>
     <main class="allcontainer">
         <div class="sidebar">
             <header >
                 <span class="logo">
-                    <img  width="70px" src="../Gimages/logo.png">
+                    <img  width="70px" src="../Gimages/newlogo.png">
                 </span>
                 
                 <nav >
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
+                        <li><a href="about.html">About us</a></li>
                         <li><a href="ministries.html">Ministries</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="contact.html">Contact us</a></li>
                     </ul>
                 </nav>
             </header>
@@ -32,7 +47,7 @@
                 <div class="service">
                     <h2>Order of Service</h2>
                     <ul>
-                        <li>Main Service: 10am - 12:30pm</li>
+                        <li>Main Service: 10am - 12:00noon</li>
                         <li>Children's Service: 11:00am - 12:00noon</li>
                     </ul>
                 </div>
@@ -48,16 +63,16 @@
                     <ul>
                         <li><a href="ministries.html">Ministries</a></li>
                         <li><a href="media.html">Social Media</a></li>
-                        <li><a href="https://maps.app.goo.gl/sDkVTRP2giq3rGSp8" target="_blank">Our Location</a></li>
+                        <li><a href="https://maps.app.goo.gl/arUoqzGn2wXQx3x1A" target="_blank">Our Location</a></li>
                         <li><a href="contact.html">FAQs</a></li>
                     </ul>
                 </div>
                 <div class="social-media">
                     <h2>Social Media</h2>
                     <ul class="social-icons">
-                        <li><a href="https://www.facebook.com/profile.php?id=61557357172084&mibextid=ZbWKwL" target="_blank"><img src="../Gimages/f.png" alt="Facebookr"></a></li>
-                        <li><a href="https://www.youtube.com/channel/UCG5Z3ReMrBuOxr9clqTKWtQ" target="_blank"><img src="../Gimages/youtube.png" alt="YouTube"></a></li>
-                        <li><a href="https://www.youtube.com/channel/UCG5Z3ReMrBuOxr9clqTKWtQ" target="_blank"><img src="../Gimages/Gmail.png" alt="Email"></a></li>
+                        <li><a href="https://www.facebook.com/profile.php?id=61563584724473" target="_blank"><img src="../Gimages/f.png" alt="Facebookr"></a></li>
+                        <li><a href="https://youtube.com/@bereagmcnaivasha?si=LFufl-3u_2hEfiAC" target="_blank"><img src="../Gimages/youtube.png" alt="YouTube"></a></li>
+                        <li><a href="mailto:ccithefountainoflife@gmail.com"><img src="../Gimages/Gmail.png" alt="Email"></a></li>
                     </ul>
                 </div>
             </div>
@@ -152,11 +167,48 @@
         </section>
         
     </main>
+    <span class="phone">
+        <div class="divee">
+            <div class="service">
+                <h2>Order of Service</h2>
+                <ul>
+                    <li>Main Service: 10am - 12:00noon</li>
+                    <li>Children's Service: 11:00am - 12:00noon</li>
+                </ul>
+            </div>
+            <div class="about">
+                <h2>About Us</h2>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="for-you">
+                <h2>For You</h2>
+                <ul>
+                    <li><a href="ministries.html">Ministries</a></li>
+                    <li><a href="media.html">Social Media</a></li>
+                    <li><a href="https://maps.app.goo.gl/arUoqzGn2wXQx3x1A" target="_blank">Our Location</a></li>
+                    <li><a href="contact.html">FAQs</a></li>
+                </ul>
+            </div>
+            <div class="social-media">
+                <h2>Social Media</h2>
+                <ul class="social-icons">
+                    <li><a href="https://www.facebook.com/profile.php?id=61563584724473" target="_blank"><img src="../Gimages/f.png" alt="Facebookr"></a></li>
+                    <li><a href="https://youtube.com/@bereagmcnaivasha?si=LFufl-3u_2hEfiAC" target="_blank"><img src="../Gimages/youtube.png" alt="YouTube"></a></li>
+                    <li><a href="mailto:ccithefountainoflife@gmail.com"><img src="../Gimages/Gmail.png" alt="Email"></a></li>
+                </ul>
+            </div>
+        </div>
+    </span>
     <footer class="footer">
         <div class="footer-bottom">
-            <p>&copy; 2024 Global Methodist Church - Naivasha. All Rights Reserved.</p>
+            <p>&copy; 2024 Berean Global Methodist Church - Naivasha. All Rights Reserved.</p>
         </div>
     </footer>
+    <script src ="index.js"></script>
+    
 </body>
 
 </html>
