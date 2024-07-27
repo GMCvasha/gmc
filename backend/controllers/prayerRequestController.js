@@ -1,4 +1,4 @@
-const sendEmail = require('../services/emailService');
+const sendEmail = require('../service/emailService');
 const createPrayerRequest = async (req, res) => {
     const { name, phone, prayerRequest } = req.body;
 
