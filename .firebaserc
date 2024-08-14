@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "bgmcnaivasha"
-  }
+    "default": "bereanglobalmethodistnaivasha",
+    "new": "bereanglobalmethodistnaivasha"
+  },
+  "targets": {},
+  "etags": {}
 }
