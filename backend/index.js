@@ -6,6 +6,7 @@ const socketIo = require('socket.io');
 require('dotenv').config();
 const prayerRequestRoutes = require('./routes/prayerRequestRoutes');
 const eventsRouter = require('./routes/events');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 const server = http.createServer(app);
@@ -28,6 +29,7 @@ app.use(express.json());
 
 app.use('/api/events', eventsRouter);
 app.use('/prayer-requests', prayerRequestRoutes);
+app.use('/api/auth', authRoutes);
 
 io.on('connection', (socket) => {
   console.log('New client connected');
