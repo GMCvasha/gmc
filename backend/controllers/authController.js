@@ -3,8 +3,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
 const crypto = require('crypto');
-const { generateAlphanumericVerificationCode } = require('../services/verificationcode');
-const sendEmail = require('../services/emailService');
+const { generateAlphanumericVerificationCode } = require('../service/verificationcode');
+const sendEmail = require('../service/emailService');
 require('dotenv').config();
 
 const registerUser = async (req, res) => {
