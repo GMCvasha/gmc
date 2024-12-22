@@ -7,6 +7,8 @@ import RequireAuth from './RequireAuth'; // Import the authentication check comp
 import Login from './components/login';
 import Register from './components/Register';
 import Dash from './components/dash';
+import Verification from './components/Verification';
+import Success from './components/Success';
 
 
 const socket = io('https://elosystemv1.onrender.com');
@@ -37,6 +39,9 @@ const App = () => {
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dash" element={<Dash />} />
+
+          <Route path="/success" element={<Success />} />
+          <Route path="/verification" element={<Verification />} />
 
           {/* Protected routes */}
           <Route element={<RequireAuth />} >

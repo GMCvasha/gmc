@@ -58,7 +58,7 @@ const Login = () => {
     setMessage('');
 
     try {
-      const response = await axiosInstance.post('/auth/login', {
+      const response = await axiosInstance.post('auth/login', {
         username: username.trim(),
         password,
       });
