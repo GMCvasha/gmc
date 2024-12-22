@@ -74,7 +74,7 @@ const Login = () => {
         alert('Failed to log in this app is for buyers only.');
       }else {
         const currentpage = sessionStorage.getItem('currentpage');
-        navigate(currentpage ? currentpage : '/');
+        navigate(currentpage ? currentpage : '/dash');
       }
     } catch (error) {
       if (error.response && error.response.data) {

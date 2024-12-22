@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentDate = new Date();
 
   async function fetchEvents() {
-    const response = await fetch('https://gmc.onrender.com/api/events');
+    const response = await fetch('https://gmc-l83v.onrender.com/api/events');
     events = await response.json();
     renderCalendars();
   }
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const date = eventDateInput.value;
     const title = eventTitleInput.value;
     if (date && title) {
-      await fetch('https://gmc.onrender.com/api/events', {
+      await fetch('https://gmc-l83v.onrender.com/api/events', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ date, title }),

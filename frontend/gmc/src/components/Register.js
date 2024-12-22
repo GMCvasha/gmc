@@ -55,7 +55,7 @@ const Register = () => {
     setTouched(true);
     if (validateStep()) {
       try {
-        const response = await axiosInstance.post('/auth/register', formData);
+        const response = await axiosInstance.post('auth/register', formData);
   
         if (response.status === 200 || response.status === 201) {
           setMessage('Registration successful');

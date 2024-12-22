@@ -8,7 +8,7 @@ document.getElementById('prayerRequestForm').addEventListener('submit', async fu
     };
 
     try {
-        const response = await fetch('https://gmc.onrender.com/prayer-requests', {
+        const response = await fetch('https://gmc-l83v.onrender.com/prayer-requests', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
