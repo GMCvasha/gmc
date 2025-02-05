@@ -1,52 +1,81 @@
-const { bucket } = require('../config/firebase');
+const bucket = require("../models/firebaseConfig");
 const Image = require('../models/image');
 
-async function uploadFiles(files) {
-  if (!files || files.length === 0) return [];
+const uploadFile = async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: "No file uploaded." });
+  }
 
-  // Use `map` to upload all files and return an array of promises
-  const uploadPromises = files.map(async (file) => {
-    const fileName = Date.now() + '-' + file.originalname; // Generate unique file name
-    const fileUpload = bucket.file(fileName);
+  try {
+    const fileName = `${Date.now()}_${req.file.originalname}`;
+    const file = bucket.file(fileName);
 
-    const stream = fileUpload.createWriteStream({
+    const stream = file.createWriteStream({
       metadata: {
-        contentType: file.mimetype,
+        contentType: req.file.mimetype,
       },
     });
 
-    return new Promise((resolve, reject) => {
-      stream.on('error', (err) => reject(err));
-      stream.on('finish', async () => {
-        const publicUrl = `https://storage.googleapis.com/${bucket.name}/${fileName}`;
-        console.log("Uploaded image:", publicUrl);
-        resolve(publicUrl);
-      });
-      stream.end(file.buffer);
+    stream.on("error", (error) => {
+      console.error("Upload error:", error);
+      res.status(500).json({ error: "Upload failed." });
     });
-  });
 
-  // Await all promises and return array of URLs
-  return Promise.all(uploadPromises);
-}
+    stream.on("finish", async () => {
+      // Make the file publicly accessible
+      await file.makePublic();
+      const publicUrl = `https://storage.googleapis.com/${bucket.name}/${fileName}`;
+      res.status(200).json({ url: publicUrl });
+    });
+
+    stream.end(req.file.buffer);
+  } catch (error) {
+    console.error("Error uploading file:", error);
+    res.status(500).json({ error: "Internal server error." });
+  }
+};
 
 exports.updateUserImage = async (req, res) => {
   try {
-    const file = req.file;
-    if (!file) return res.status(400).json({ message: "No file uploaded" });
+    const file = req.file; // Handling single file upload
+    const { description, dateTaken, tags } = req.body; // Extract metadata
 
-    const uploadResponse = await uploadFiles(file);
+    console.log('==================================');
+    console.log(description);
+    console.log('==================================');
+    console.log(dateTaken);
+    console.log('============= in =================');
+    console.log(tags);
+    console.log('==================================');
+    console.log('==================================');
 
-    if (uploadResponse.status !== "success") {
-      return res.status(500).json({ message: "Upload failed", error: uploadResponse.message });
+    if (!file) {
+      return res.status(400).json({ message: 'No file uploaded' });
     }
 
-    res.status(200).json({ message: "Image uploaded successfully", url: uploadResponse.url });
+    // Upload the file and get the URL
+    const imageUrl = await uploadFile(req, res); // Directly use req and res for uploadFile
+
+    // Create a new image document
+    const image = new Image({
+      url: imageUrl,
+      description,
+      dateTaken: dateTaken ? new Date(dateTaken) : undefined,
+      tags: tags || "General",
+    });
+
+    await image.save();
+
+    res.status(200).json({
+      message: 'Image updated successfully',
+    });
+
   } catch (error) {
-    console.error("Error in updateUserImage:", error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
   }
 };
+
 
 
 
