@@ -1,4 +1,4 @@
-const bucket = require("../models/firebaseConfig");
+const bucket = require("../models/firebase");
 const Image = require('../models/image');
 
 const uploadFile = async (req, res) => {
