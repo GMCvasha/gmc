@@ -32,42 +32,19 @@ async function uploadFiles(files) {
 
 exports.updateUserImage = async (req, res) => {
   try {
+    const file = req.file;
+    if (!file) return res.status(400).json({ message: "No file uploaded" });
 
-    const file = req.file; // Handling single file upload
-    const { description, dateTaken, tags } = req.body; // Extract metadata
-   console.log('==================================');
-   console.log(description);
-   console.log('==================================');
-   console.log(dateTaken);
-   console.log('============= in =================');
-   console.log(tags);
-   console.log('==================================');
-   console.log(file);
-   console.log('==================================');
-    if (!file) {
-      return res.status(400).json({ message: 'No file uploaded' });
+    const uploadResponse = await uploadFile(file);
+
+    if (uploadResponse.status !== "success") {
+      return res.status(500).json({ message: "Upload failed", error: uploadResponse.message });
     }
 
-    // Upload the file and get the URL
-    const imageUrl = await uploadFile(file);
-
-    // Create a new image document
-    const image = new Image({
-      url: imageUrl,
-      description,
-      dateTaken: dateTaken ? new Date(dateTaken) : undefined,
-      tags: tags || "General",
-    });
-
-    await image.save();
-
-    res.status(200).json({
-      message: 'Image updated successfully',
-    });
-
+    res.status(200).json({ message: "Image uploaded successfully", url: uploadResponse.url });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    console.error("Error in updateUserImage:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
