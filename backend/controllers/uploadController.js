@@ -1,39 +1,34 @@
 const { bucket } = require('../config/firebase');
 const Image = require('../models/image');
 
-const uploadFile = async (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: "No file uploaded." });
-  }
+async function uploadFiles(files) {
+  if (!files || files.length === 0) return [];
 
-  try {
-    const fileName = `${Date.now()}_${req.file.originalname}`;
-    const file = bucket.file(fileName);
+  // Use `map` to upload all files and return an array of promises
+  const uploadPromises = files.map(async (file) => {
+    const fileName = Date.now() + '-' + file.originalname; // Generate unique file name
+    const fileUpload = bucket.file(fileName);
 
-    const stream = file.createWriteStream({
+    const stream = fileUpload.createWriteStream({
       metadata: {
-        contentType: req.file.mimetype,
+        contentType: file.mimetype,
       },
     });
 
-    stream.on("error", (error) => {
-      console.error("Upload error:", error);
-      res.status(500).json({ error: "Upload failed." });
+    return new Promise((resolve, reject) => {
+      stream.on('error', (err) => reject(err));
+      stream.on('finish', async () => {
+        const publicUrl = `https://storage.googleapis.com/${bucket.name}/${fileName}`;
+        console.log("Uploaded image:", publicUrl);
+        resolve(publicUrl);
+      });
+      stream.end(file.buffer);
     });
+  });
 
-    stream.on("finish", async () => {
-      // Make the file publicly accessible
-      await file.makePublic();
-      const publicUrl = `https://storage.googleapis.com/${bucket.name}/${fileName}`;
-      res.status(200).json({ url: publicUrl });
-    });
-
-    stream.end(req.file.buffer);
-  } catch (error) {
-    console.error("Error uploading file:", error);
-    res.status(500).json({ error: "Internal server error." });
-  }
-};
+  // Await all promises and return array of URLs
+  return Promise.all(uploadPromises);
+}
 
 exports.updateUserImage = async (req, res) => {
   try {
