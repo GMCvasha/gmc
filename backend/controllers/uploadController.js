@@ -35,7 +35,7 @@ exports.updateUserImage = async (req, res) => {
     const file = req.file;
     if (!file) return res.status(400).json({ message: "No file uploaded" });
 
-    const uploadResponse = await uploadFile(file);
+    const uploadResponse = await uploadFiles(file);
 
     if (uploadResponse.status !== "success") {
       return res.status(500).json({ message: "Upload failed", error: uploadResponse.message });
