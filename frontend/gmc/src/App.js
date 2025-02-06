@@ -44,20 +44,19 @@ const App = () => {
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dash" element={<Dash />} />
-          <Route path="/imageform" element={<Imageform />} />
-          <Route path="/images" element={<Imagedisplay />} />
           <Route path="/reset-password" element={<Passwordrecovery />} />
           <Route path="/success" element={<Success />} />
           <Route path="/verification" element={<Verification />} />
 
-          <Route path="/cal" element={<Cal />} />
-          <Route path="/Dashboard" element={<Dashboard />} />
 
-          <Route path="/logout" element={<Logout />} />
           
           {/* Protected routes */}
           <Route element={<RequireAuth />} >
-
+              <Route path="/imageform" element={<Imageform />} />
+              <Route path="/images" element={<Imagedisplay />} />
+              <Route path="/cal" element={<Cal />} />
+              <Route path="/Dashboard" element={<Dashboard />} />
+              <Route path="/logout" element={<Logout />} />
           </Route>
         </Routes>
       </div>
