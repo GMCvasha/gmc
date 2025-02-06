@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axiosInstance from './axiosInstance';
-import "./styles/imagedisplay.css";
+import './styles/imagedisplay.css';
 
 const ImageGallery = () => {
   const [images, setImages] = useState([]);
@@ -34,6 +34,20 @@ const ImageGallery = () => {
   const totalPages = Math.ceil(images.length / imagesPerPage);
   const currentImages = images.slice((currentPage - 1) * imagesPerPage, currentPage * imagesPerPage);
 
+  // Delete image function
+  const handleDelete = async (imageId) => {
+    try {
+      // Sending DELETE request to backend
+      const response = await axiosInstance.delete(`images/images/${imageId}`);
+      if (response.status === 200) {
+        // Remove image from local state
+        setImages(images.filter(image => image._id !== imageId));
+      }
+    } catch (err) {
+      setError('Error deleting the image.');
+    }
+  };
+
   return (
     <div className="imgdisp-container">
       <h2 className="imgdisp-title">Image Gallery</h2>
@@ -58,8 +72,16 @@ const ImageGallery = () => {
                         />
                         <p className="imgdisp-desc">{image.description || 'No description'}</p>
                         <p className="imgdisp-tags">Tags: {image.tags}</p>
+
+                        {/* Delete button */}
+                        <button
+                          className="imgdisp-delete-btn"
+                          onClick={() => handleDelete(image._id)}
+                        >
+                          Delete
+                        </button>
                       </div>
-                  ))}
+                    ))}
                 </div>
               </div>
             ))}
