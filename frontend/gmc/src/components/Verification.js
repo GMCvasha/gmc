@@ -1,6 +1,7 @@
 import axiosInstance from './axiosInstance';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './styles/ThankYou.css';
 
 function Verification() {
   const [email, setEmail] = useState('');
@@ -92,6 +93,7 @@ function Verification() {
     <div className="container">
       <h2>Verify Your Account</h2>
       <h4>Check your email to get the verification code.</h4>
+      <h6>If you didn't see it check the spam folder before requesting for a Resend.</h6>
       <form onSubmit={handleVerify}>
         {emailPresent && !editingEmail ? (
           <div>

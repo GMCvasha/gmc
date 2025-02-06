@@ -2,7 +2,7 @@ import axiosInstance from './axiosInstance';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getUsernameFromToken, getcategoryFromToken } from '../utils/auth';
-
+import './styles/Login.css';
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -14,6 +14,32 @@ const Login = () => {
   const token = localStorage.getItem('token');
   const apptoken = localStorage.getItem('apptoken');
   const appcat = localStorage.getItem('appcat');
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [isInstalled, setIsInstalled] = useState(true);
+
+  useEffect(() => {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setIsInstalled(false);
+    });
+
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      setIsInstalled(true);
+    }
+  }, []);
+
+  const handleInstall = () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          setIsInstalled(true);
+        }
+        setDeferredPrompt(null);
+      });
+    }
+  };
 
   useEffect(() => {
     // If apptoken is set, use it to set the token and navigate based on the app category
@@ -107,57 +133,65 @@ const Login = () => {
 
   return (
     <div className="container">
-      <form onSubmit={recoverpassword ? sendRecovEmail : handleSubmit}>
-        {!recoverpassword ? (
-          <div>
-            <h2>Login</h2>
-            <label>Username or Email:</label>
-            <input
-              type="text"
-              value={username}
-              placeholder="Username or Email"
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-
-            <label>Password:</label>
-            <div className="password-container">
+      {!isInstalled ? (
+        <div className="install-prompt">
+          <p>Install this web app for a better experience.</p>
+          <button onClick={handleInstall}>Install</button>
+        </div>
+      ):(
+          <form onSubmit={recoverpassword ? sendRecovEmail : handleSubmit}>
+          {!recoverpassword ? (
+            <div>
+              <h2>Login</h2>
+              <label>Email:</label>
               <input
-                type={showPassword ? 'text' : 'password'}
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                type="text"
+                value={username}
+                placeholder="Email"
+                onChange={(e) => setUsername(e.target.value)}
                 required
               />
-              <button
-                type="button"
-                className="toggle-password"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <FaRegEyeSlash/> : <FaRegEye/>}
-              </button>
+
+              <label>Password:</label>
+              <div className="password-container">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  className="toggle-password"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FaRegEyeSlash/> : <FaRegEye/>}
+                </button>
+              </div>
+              <button type="submit">Login</button>
+              <button type="button" onClick={handleRecoverPassword}>Forgot Password</button>
+              <p>Verify your account <Link to="/verification">Verify Account</Link></p>
+              <p>If you don't have an account <Link to="/register">Register</Link></p>
             </div>
-            <button type="submit">Login</button>
-            <button type="button" onClick={handleRecoverPassword}>Forgot Password</button>
-            <p>Verify your account <Link to="/verification">Verify Account</Link></p>
-            <p>If you don't have an account <Link to="/register">Register</Link></p>
-          </div>
-        ) : (
-          <div>
-            <h2>Recover password</h2>
-            <label>Enter your username:</label>
-            <input
-              type="text"
-              value={username}
-              placeholder="Enter your username"
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-            <button type="submit">Recover password</button>
-            <button type="button" onClick={handleRecoverPassword}>Back</button>
-          </div>
-        )}
-      </form>
+          ) : (
+            <div>
+              <h2>Recover password</h2>
+              <label>Enter your Email:</label>
+              <input
+                type="text"
+                value={username}
+                placeholder="Enter your email"
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+              <button type="submit">Recover password</button>
+              <button type="button" onClick={handleRecoverPassword}>Back</button>
+            </div>
+          )}
+        </form>
+      )}
+
       <div className="divmess">
         {message && <p className="message">{message}</p>}
       </div>

@@ -1,0 +1,161 @@
+/* General styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Container */
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f4f7fa;
+    padding: 20px;
+  }
+  
+  /* Form */
+  form {
+    background: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  /* Title */
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+  }
+  
+  /* Label */
+  label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+    color: #555;
+  }
+  
+  /* Input fields */
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #4a90e2;
+  }
+  
+  /* Password container */
+  .password-container {
+    position: relative;
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    width: 0px;
+    height: 0px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #4a90e2;
+    font-size: 18px;
+  }
+  
+  /* Buttons */
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4a90e2;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+  }
+  
+  button:hover {
+    background-color: #357ab7;
+  }
+  
+  button[type="button"] {
+    background-color: #f1f1f1;
+    color: #4a90e2;
+    border: 1px solid #ddd;
+  }
+  
+  button[type="button"]:hover {
+    background-color: #ddd;
+  }
+  
+  /* Links */
+  p {
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  p a {
+    color: #4a90e2;
+    text-decoration: none;
+  }
+  
+  p a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Message box */
+  .divmess {
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .message {
+    background: #fffcf7;
+    color: #e77a7a;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #e77a7a;
+    font-size: 14px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .container {
+      padding: 10px;
+    }
+  
+    form {
+      padding: 30px;
+    }
+  
+    h2 {
+      font-size: 20px;
+    }
+  
+    input {
+      font-size: 14px;
+    }
+  
+    button {
+      font-size: 14px;
+    }
+  }
+  

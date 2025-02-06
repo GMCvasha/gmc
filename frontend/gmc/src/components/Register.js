@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import axiosInstance from './axiosInstance';
+import './styles/register.css';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [isNextEnabled, setIsNextEnabled] = useState(false);
   const [touched, setTouched] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastname: "",
@@ -54,16 +58,23 @@ const Register = () => {
     e.preventDefault();
     setTouched(true);
     if (validateStep()) {
+      setLoading(true);
+      setMessage('Registering...'); // Show registering message
+
       try {
         const response = await axiosInstance.post('auth/register', formData);
   
         if (response.status === 200 || response.status === 201) {
           setMessage('Registration successful');
+          sessionStorage.setItem('email', formData.email);
+          navigate('/verification');
         } else {
           setMessage(response.data.message || 'Registration failed. Please try again.');
         }
       } catch (error) {
         setMessage(error.response?.data?.message || 'An error occurred. Please try again later.');
+      } finally {
+        setLoading(false); // Allow button to be clicked again
       }
     }
   };
@@ -167,17 +178,19 @@ const Register = () => {
 
         <div className="button-controls">
           {currentStep > 1 && (
-            <button type="button" onClick={() => setCurrentStep(currentStep - 1)}>
+            <button type="button" onClick={() => setCurrentStep(currentStep - 1)} disabled={loading}>
               Previous
             </button>
           )}
 
           {currentStep < 2 ? (
-            <button type="button" onClick={nextStep}>
+            <button type="button" onClick={nextStep} disabled={loading}>
               Next
             </button>
           ) : (
-            <button type="submit">Submit</button>
+            <button type="submit" disabled={loading}>
+              {loading ? "Registering..." : "Submit"}
+            </button>
           )}
         </div>
       </form>

@@ -11,3 +11,4 @@ function menu()
            menu_b.style.display = "none";
        }
 }
+document.getElementById("year").textContent = new Date().getFullYear();
