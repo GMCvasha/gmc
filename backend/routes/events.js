@@ -3,6 +3,24 @@ const router = express.Router();
 const Event = require('../models/Event');
 
 // Get all events
+// In your backend API (e.g., events.js or routes file)
+// DELETE route to delete an event by its ID
+router.delete('/events/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const event = await Event.findByIdAndDelete(id);
+    
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+
+    res.status(200).json({ message: "Event deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 router.get('/', async (req, res) => {
   try {
     const events = await Event.find();

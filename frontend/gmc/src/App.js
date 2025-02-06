@@ -11,6 +11,7 @@ import Verification from './components/Verification';
 import Success from './components/Success';
 import Imageform from './components/imageform';
 import Imagedisplay from './components/imagedisplay';
+import Cal from './components/cal';
 
 
 const socket = io('https://elosystemv1.onrender.com');
@@ -46,6 +47,8 @@ const App = () => {
           
           <Route path="/success" element={<Success />} />
           <Route path="/verification" element={<Verification />} />
+
+          <Route path="/cal" element={<Cal />} />
           
           {/* Protected routes */}
           <Route element={<RequireAuth />} >
