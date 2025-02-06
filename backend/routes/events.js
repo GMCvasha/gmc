@@ -5,7 +5,7 @@ const Event = require('../models/Event');
 // Get all events
 // In your backend API (e.g., events.js or routes file)
 // DELETE route to delete an event by its ID
-router.delete('/events/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const event = await Event.findByIdAndDelete(id);

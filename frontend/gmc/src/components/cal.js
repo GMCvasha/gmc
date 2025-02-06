@@ -49,17 +49,45 @@ const CalendarPage = () => {
     }
   };
 
+  const handleDeleteEvent = async (eventId) => {
+    try {
+      // Send a DELETE request to the backend
+      const response = await fetch(`${API_URL}/${eventId}`, {
+        method: "DELETE",
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to delete event");
+      }
+  
+      // Refresh the events after deletion
+      fetchEvents();
+    } catch (error) {
+      console.error("Error deleting event:", error);
+    }
+  };
+  
+  // Update the Calendar Component to pass eventId for deletion
   const renderCalendars = () => {
     const startMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
     const endMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 2, 0);
     const calendars = [];
-
+  
     for (let date = new Date(startMonth); date <= endMonth; date.setMonth(date.getMonth() + 1)) {
-      calendars.push(<Calendar key={date.toString()} date={new Date(date)} events={events} />);
+      calendars.push(
+        <Calendar
+          key={date.toString()}
+          date={new Date(date)}
+          events={events}
+          onDeleteEvent={handleDeleteEvent} // Pass delete handler to Calendar component
+        />
+      );
     }
-
+  
     return calendars;
   };
+  
+
 
   return (
     <div>
@@ -85,43 +113,56 @@ const CalendarPage = () => {
   );
 };
 
-const Calendar = ({ date, events }) => {
-  const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-  const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-
-  return (
-    <div className="calendar">
-      <div className="calendar-header">
-        <h2>{date.toLocaleString("default", { month: "long" })} {date.getFullYear()}</h2>
+const Calendar = ({ date, events, onDeleteEvent }) => {
+    const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+    const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+  
+    return (
+      <div className="calendar">
+        <div className="calendar-header">
+          <h2>{date.toLocaleString("default", { month: "long" })} {date.getFullYear()}</h2>
+        </div>
+  
+        <div className="days-of-week">
+          <div>Sun</div>
+          <div>Mon</div>
+          <div>Tue</div>
+          <div>Wed</div>
+          <div>Thu</div>
+          <div>Fri</div>
+          <div>Sat</div>
+        </div>
+  
+        <div className="calendar-days">
+          {Array.from({ length: firstDayOfMonth }).map((_, i) => (
+            <div key={`empty-${i}`} className="empty"></div>
+          ))}
+          {Array.from({ length: daysInMonth }, (_, i) => {
+            const day = i + 1;
+            const event = events.find(e => new Date(e.date).getDate() === day && new Date(e.date).getMonth() === date.getMonth());
+  
+            return (
+              <div
+                key={day}
+                className={`day ${event ? "event" : ""}`}
+                title={event?.title || ""}
+              >
+                {day}
+                {event && (
+                  <button
+                    className="delete-event"
+                    onClick={() => onDeleteEvent(event._id)} // Call delete handler with event ID
+                  >
+                    X
+                  </button>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
-
-      <div className="days-of-week">
-        <div>Sun</div>
-        <div>Mon</div>
-        <div>Tue</div>
-        <div>Wed</div>
-        <div>Thu</div>
-        <div>Fri</div>
-        <div>Sat</div>
-      </div>
-
-      <div className="calendar-days">
-        {Array.from({ length: firstDayOfMonth }).map((_, i) => (
-          <div key={`empty-${i}`} className="empty"></div>
-        ))}
-        {Array.from({ length: daysInMonth }, (_, i) => {
-          const day = i + 1;
-          const event = events.find(e => new Date(e.date).getDate() === day && new Date(e.date).getMonth() === date.getMonth());
-
-          return (
-            <div key={day} className={`day ${event ? "event" : ""}`} title={event?.title || ""}>
-              {day}
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
+    );
+  };
+  
 
 export default CalendarPage;
