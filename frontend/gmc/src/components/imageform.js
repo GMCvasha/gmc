@@ -30,7 +30,7 @@ const ImageUpload = ({ username }) => {
       setMessage('');
 
       const response = await axiosInstance.put(
-        `/images/image`,
+        `images/image`,
         formData,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       );

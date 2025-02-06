@@ -10,6 +10,7 @@ import Dash from './components/dash';
 import Verification from './components/Verification';
 import Success from './components/Success';
 import Imageform from './components/imageform';
+import Imagedisplay from './components/imagedisplay';
 
 
 const socket = io('https://elosystemv1.onrender.com');
@@ -41,10 +42,11 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/dash" element={<Dash />} />
           <Route path="/imageform" element={<Imageform />} />
+          <Route path="/images" element={<Imagedisplay />} />
           
           <Route path="/success" element={<Success />} />
           <Route path="/verification" element={<Verification />} />
-
+          
           {/* Protected routes */}
           <Route element={<RequireAuth />} >
 
