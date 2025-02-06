@@ -35,7 +35,7 @@ const registerUser = async (req, res) => {
     Verification Code: ${alphanumericCode}
     
     Alternatively, you can verify your account by clicking the link below:  
-    <a href="https://churchapp.web.app/verification" target="_blank">Verify My Account</a>
+    <a href="https://admin-bgmc.web.app/verification" target="_blank">Verify My Account</a>
     
     If you have any questions or need help, don’t hesitate to contact us.
     
@@ -59,7 +59,7 @@ const registerUser = async (req, res) => {
 
       <div style="text-align: center; margin-bottom: 25px;">
         <p style="font-size: 16px; color: #555;">Click the button below to verify your account and complete your registration:</p>
-        <a href="https://churchapp.web.app/verification" style="display: inline-block; padding: 14px 30px; font-size: 16px; color: #ffffff; background-color: #2D6A4F; text-decoration: none; border-radius: 6px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); font-weight: bold;">
+        <a href="https://admin-bgmc.web.app/verification" style="display: inline-block; padding: 14px 30px; font-size: 16px; color: #ffffff; background-color: #2D6A4F; text-decoration: none; border-radius: 6px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); font-weight: bold;">
           Verify My Account
         </a>
       </div>
@@ -186,7 +186,7 @@ const updateEmail = async (req, res) => {
     Verification Code: ${user.verificationCode}
     
     Alternatively, you can verify your account by clicking the link below:  
-    <a href="https://churchapp.web.app/verification" target="_blank">Verify My Account</a>
+    <a href="https://admin-bgmc.web.app/verification" target="_blank">Verify My Account</a>
     
     If you have any questions or need help, don’t hesitate to contact us.
     
@@ -210,7 +210,7 @@ const updateEmail = async (req, res) => {
 
       <div style="text-align: center; margin-bottom: 25px;">
         <p style="font-size: 16px; color: #555;">Click the button below to verify your account and complete your registration:</p>
-        <a href="https://churchapp.web.app/verification" style="display: inline-block; padding: 14px 30px; font-size: 16px; color: #ffffff; background-color: #2D6A4F; text-decoration: none; border-radius: 6px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); font-weight: bold;">
+        <a href="https://admin-bgmc.web.app/verification" style="display: inline-block; padding: 14px 30px; font-size: 16px; color: #ffffff; background-color: #2D6A4F; text-decoration: none; border-radius: 6px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); font-weight: bold;">
           Verify My Account
         </a>
       </div>
@@ -265,7 +265,7 @@ const resendVerificationCode = async (req, res) => {
     Verification Code: ${user.verificationCode}
     
     Alternatively, you can verify your account by clicking the link below:  
-    <a href="https://churchapp.web.app/verification" target="_blank">Verify My Account</a>
+    <a href="https://admin-bgmc.web.app/verification" target="_blank">Verify My Account</a>
     
     If you have any questions or need help, don’t hesitate to contact us.
     
@@ -289,7 +289,7 @@ const resendVerificationCode = async (req, res) => {
 
       <div style="text-align: center; margin-bottom: 25px;">
         <p style="font-size: 16px; color: #555;">Click the button below to verify your account and complete your registration:</p>
-        <a href="https://churchapp.web.app/verification" style="display: inline-block; padding: 14px 30px; font-size: 16px; color: #ffffff; background-color: #2D6A4F; text-decoration: none; border-radius: 6px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); font-weight: bold;">
+        <a href="https://admin-bgmc.web.app/verification" style="display: inline-block; padding: 14px 30px; font-size: 16px; color: #ffffff; background-color: #2D6A4F; text-decoration: none; border-radius: 6px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); font-weight: bold;">
           Verify My Account
         </a>
       </div>
@@ -337,7 +337,7 @@ const newrecoverPassword = async (req, res) => {
     
     Password Reset Token: ${user.passwordRecoveryToken}
     
-    Alternatively, you can reset your password by following this link: https://baze-link.web.app/reset-password
+    Alternatively, you can reset your password by following this link: https://admin-bgmc.web.app/reset-password
     
     This token is valid for 1 hour. If you did not request a password reset, please ignore this message.
     
@@ -358,7 +358,7 @@ const newrecoverPassword = async (req, res) => {
         </p>
       </div>
       <p style="text-align: center;">
-        <a href="https://baze-link.web.app/reset-password" style="display: inline-block; padding: 12px 25px; font-size: 16px; color: #ffffff; background-color: #1d4ed8; text-decoration: none; border-radius: 6px; margin-top: 15px;">
+        <a href="https://admin-bgmc.web.app/reset-password" style="display: inline-block; padding: 12px 25px; font-size: 16px; color: #ffffff; background-color: #1d4ed8; text-decoration: none; border-radius: 6px; margin-top: 15px;">
           Reset Your Password
         </a>
       </p>
@@ -417,7 +417,7 @@ const logout = async (req, res) => {
   const { username } = req.body;
 
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ email: username });
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -431,6 +431,7 @@ const logout = async (req, res) => {
     res.status(500).json({ message: 'Logout failed.' });
   }
 };
+
 
 const changeusername = async (req, res) => {
   const { lemail, newUsername } = req.body;

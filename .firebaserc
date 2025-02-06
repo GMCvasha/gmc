@@ -1,8 +1,19 @@
 {
   "projects": {
-    "default": "bgmc-admin",
+    "default": "gmc-naivasha",
     "new": "bereanglobalmethodistnaivasha"
   },
-  "targets": {},
+  "targets": {
+    "gmc-naivasha": {
+      "hosting": {
+        "main": [
+          "gmc-naivasha"
+        ],
+        "admin": [
+          "admin-bgmc"
+        ]
+      }
+    }
+  },
   "etags": {}
 }

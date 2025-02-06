@@ -14,7 +14,7 @@ import Imagedisplay from './components/imagedisplay';
 import Cal from './components/cal';
 import Dashboard from './components/Dashboard';
 import Logout from './components/Logout';
-
+import Passwordrecovery from './components/passwordreset';
 
 const socket = io('https://elosystemv1.onrender.com');
 
@@ -46,7 +46,7 @@ const App = () => {
           <Route path="/dash" element={<Dash />} />
           <Route path="/imageform" element={<Imageform />} />
           <Route path="/images" element={<Imagedisplay />} />
-          
+          <Route path="/reset-password" element={<Passwordrecovery />} />
           <Route path="/success" element={<Success />} />
           <Route path="/verification" element={<Verification />} />
 

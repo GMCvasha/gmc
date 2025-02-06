@@ -45,18 +45,7 @@ const Login = () => {
     // If apptoken is set, use it to set the token and navigate based on the app category
     if (apptoken) {
       localStorage.setItem('token', apptoken);
-      if (appcat) {
-        switch (appcat.trim().toLowerCase()) {
-          case 'seller':
-            alert('Failed to log in this app is for buyers only.');
-            navigate('/logout');
-            break;
-          default:
-            const currentpage = sessionStorage.getItem('currentpage');
-            navigate(currentpage ? currentpage : '/');
-            break;
-        }
-      }
+      navigate('/Dashboard');
     }
 
     // If token exists, store user data and determine navigation
@@ -66,6 +55,7 @@ const Login = () => {
       const trimmedCategory = category?.trim().toLowerCase(); // Add optional chaining for safety
       const storedUsername = getUsernameFromToken();
       sessionStorage.setItem('username', storedUsername);
+      navigate('/Dashboard');
     }
   }, [apptoken, appcat, token, navigate]);
 
@@ -76,6 +66,7 @@ const Login = () => {
       const trimmedCategory = category?.trim().toLowerCase(); // Add optional chaining for safety
       const storedUsername = getUsernameFromToken();
       sessionStorage.setItem('username', storedUsername);
+      navigate('/Dashboard');
     }
   }, [token, navigate]);
 
@@ -95,13 +86,8 @@ const Login = () => {
       localStorage.setItem('apptoken', response.data.token);
       localStorage.setItem('appcat', response.data.category.trim().toLowerCase());
 
-      const category = response.data.category.trim().toLowerCase();
-      if (category === 'seller') {
-        alert('Failed to log in this app is for buyers only.');
-      }else {
-        const currentpage = sessionStorage.getItem('currentpage');
-        navigate(currentpage ? currentpage : '/dash');
-      }
+      navigate('/Dashboard');
+      
     } catch (error) {
       if (error.response && error.response.data) {
         setMessage(error.response.data.message);
