@@ -8,6 +8,7 @@ const prayerRequestRoutes = require('./routes/prayerRequestRoutes');
 const eventsRouter = require('./routes/events');
 const authRoutes = require('./routes/authRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
+require('./worker');
 
 const app = express();
 const server = http.createServer(app);

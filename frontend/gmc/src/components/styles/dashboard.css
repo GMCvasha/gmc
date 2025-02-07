@@ -39,6 +39,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    max-width: 100px;
     transition: background-color 0.3s;
   }
   
@@ -61,6 +62,7 @@
     border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
+    margin: 20px;
     transition: background-color 0.3s;
   }
   
